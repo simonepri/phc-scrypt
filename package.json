@@ -4,7 +4,6 @@
   "description": "scrypt hash function implementation for credential-plus",
   "main": "index.js",
   "dependencies": {
-    "credential-plus": "^0.7.0",
     "lodash": "^4.17.4",
     "safe-buffer": "^5.1.1",
     "scrypt": "^6.0.3"
@@ -14,7 +13,8 @@
     "codecov": "^2.2.0",
     "nyc": "^11.0.3",
     "pify": "^3.0.0",
-    "xo": "*"
+    "xo": "*",
+    "credential-plus": "^0.7.0"
   },
   "engines": {
     "node": ">=4"
