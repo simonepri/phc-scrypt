@@ -1,6 +1,6 @@
 {
   "name": "credential-plus-scrypt",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "scrypt hash function implementation for credential-plus",
   "main": "index.js",
   "dependencies": {
