@@ -7,7 +7,8 @@ const _ = require('lodash');
 
 /**
  * Default configurations used to generate a new hash.
- * @type {Object}
+ * @private
+ * @type {object}
  */
 const defaultConfigs = {
   // The maximum amount of time in seconds scrypt will spend when computing the
@@ -23,43 +24,33 @@ const defaultConfigs = {
 };
 
 /**
- * Generates an unique hash.
+ * Generates an unique hash and the data needed to verify it.
+ * @public
  * @param  {string} password The password to hash.
- * @param  {object} configs  Configurations related to the hashing function.
- * @param  {generateCallback} callback Called after the hash has been generated.
+ * @param  {object} configs Configurations related to the hashing function.
+ * @returns {Promise<string>} A promise that contains the generated hash string.
  */
- /**
-  * @callback generateCallback
-  * @param  {object} err  Possible error thrown.
-  * @param  {string} hash Generated hash string.
-  */
-function hashFunc(password, configs, callback) {
+function hashFunc(password, configs) {
   const cfgs = _.extend(defaultConfigs, configs);
 
-  scrypt.params(cfgs.maxtime, cfgs.maxmem, cfgs.maxmemfrac)
-    .then(params => {
-      scrypt.kdf(password, params)
-        .then(hash => callback(null, hash.toString('base64')))
-        .catch(callback);
-    })
-    .catch(callback);
+  return new Promise((resolve, reject) => {
+    scrypt.params(cfgs.maxtime, cfgs.maxmem, cfgs.maxmemfrac)
+      .then(params => scrypt.kdf(password, params))
+      .then(hash => resolve(hash.toString('base64')))
+      .catch(reject);
+  });
 }
 
 /**
  * Determines whether or not the user's input matches the stored password.
- * @param  {object} hash Previously hashed password.
- * @param  {password} password User's password input.
- * @param  {hashCallback} callback Called after the hash has been computed.
+ * @public
+ * @param  {string} hash Stringified hash object generated from this package.
+ * @param  {string} input User's password input.
+ * @returns {Promise<boolean>} A promise that contains a boolean that is true if
+ *   if the hash computed for the input matches.
  */
- /**
-  * @callback hashCallback
-  * @param  {object} err Possible error thrown.
-  * @param  {string} match True if the hash computed for the input matches.
-  */
-function verifyFunc(hash, password, callback) {
-  scrypt.verifyKdf(Buffer.from(hash, 'base64'), Buffer.from(password))
-    .then(match => callback(null, match))
-    .catch(callback);
+function verifyFunc(hash, password) {
+  return scrypt.verifyKdf(Buffer.from(hash, 'base64'), Buffer.from(password));
 }
 
 module.exports = {
