@@ -89,19 +89,16 @@ npm install --save @upash/scrypt
 ```js
 const scrypt = require('@upash/scrypt');
 
-// Hash and verify with scrypt using default secure configs
-scrypt.hash('We are all unicorns')
-  .then(hash => {
-    console.log(hash);
-    // => "c2NyeXB0AAoAAAAIAAAAAa14PPQVNqXy2D5PBWHjMGQnXWzWN+yvzdlKIEk3D7wdDUk59jRL4djGGZxCW1IvFFM32xjW3m3cEQ9FKyGNc5HEGm/cbx2RH9yLHA5LniGq"
-    // You can store this directly in your database.
+// Hash and verify with scrypt using default secure configs.
+const match = await scrypt.hash('We are all unicorns');
+console.log(hash);
+// => "c2NyeXB0AAoAAAAIAAAAAa14PPQVNqXy2D5PBWHjMGQnXWzWN+yvzdlKIEk3D7wdDUk59jRL4djGGZxCW1IvFFM32xjW3m3cEQ9FKyGNc5HEGm/cbx2RH9yLHA5LniGq"
+// You can store this directly in your database.
 
-    scrypt.verify(hash, 'We are all unicorns')
-      .then(match => {
-        console.log(match);
-        // => true
-      });
-  });
+// Then you can verify against it in this way.
+const match = await scrypt.verify(hash, 'We are all unicorns');
+console.log(match);
+// => true
 ```
 
 ## API
