@@ -49,8 +49,8 @@
   <br/>
 
   <!-- Version - npm -->
-  <a href="https://www.npmjs.com/package/upash-scrypt">
-    <img src="https://img.shields.io/npm/v/upash-scrypt.svg" alt="Latest version on npm" />
+  <a href="https://www.npmjs.com/package/@upash/scrypt">
+    <img src="https://img.shields.io/npm/v/@upash/scrypt.svg" alt="Latest version on npm" />
   </a>
   <!-- License - MIT -->
   <a href="https://github.com/simonepri/upash-scrypt/tree/master/license">
