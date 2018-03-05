@@ -191,7 +191,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [cli]: https://github.com/simonepri/upash-cli
 [argon2]: https://github.com/simonepri/upash-argon2
 [bcrypt]: https://github.com/simonepri/upash-bcrypt
-[pbkdf2]: https://github.com/simonepri/upash-pbkdf2d
+[pbkdf2]: https://github.com/simonepri/upash-pbkdf2
 
 [npm:scrypt]: https://www.npmjs.com/package/scrypt
 
