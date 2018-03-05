@@ -152,6 +152,8 @@ the password matches the provided hash.
 ## Related
 - [@upash/universal][universal] -
 🔒 Easy to use Unified API for all password hashing algorithms.
+- [@upash/cli][cli] -
+🔒 Easy to use CLI for all password hashing algorithms.
 - [@upash/argon2][argon2] -
 🔒 Easy to use Unified API for Argon2 password hashing algorithm.
 - [@upash/bcrypt][bcrypt] -
@@ -186,6 +188,7 @@ This project is licensed under the MIT License - see the [license][license] file
 [contributing]: https://github.com/simonepri/upash-scrypt/tree/master/.github/contributing.md
 
 [universal]: https://github.com/simonepri/upash-universal
+[cli]: https://github.com/simonepri/upash-cli
 [argon2]: https://github.com/simonepri/upash-argon2
 [bcrypt]: https://github.com/simonepri/upash-bcrypt
 [pbkdf2]: https://github.com/simonepri/upash-pbkdf2d
