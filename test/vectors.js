@@ -63,7 +63,7 @@ test('should pass the test vector 3', async t => {
 });
 
 test('should pass the test vector 4', async t => {
-  if (require('os').totalmem() < 2 ** 31) {
+  if (require('os').totalmem() < 2 ** 32) {
     t.pass(); // If there isn't enough RAM installed skip the test.
     return;
   }
