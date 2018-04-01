@@ -3,11 +3,10 @@ import phc from '@phc/format';
 
 import m from '..';
 
-test('should pass the test vectors', async t => {
-  // See https://tools.ietf.org/html/rfc7914#section-12
+// See https://tools.ietf.org/html/rfc7914#section-12
 
-  // Vextor 1
-  let phcstr = phc.serialize({
+test('should pass the test vector 1', async t => {
+  const phcstr = phc.serialize({
     id: 'scrypt',
     params: {ln: 4, r: 1, p: 1},
     salt: Buffer.from(''),
@@ -23,9 +22,10 @@ test('should pass the test vectors', async t => {
   });
   // $scrypt$ln=4,r=1,p=1$$d9ZXYjhleyA7GcpCwYoEl/FrSETjB0ro39/6P+3iFEL80Aad7QlI+DJqdToPyB8X6NPg+y4NNijPNeIMONGJBg
   t.true(await m.verify(phcstr, ''));
+});
 
-  // Vextor 2
-  phcstr = phc.serialize({
+test('should pass the test vector 2', async t => {
+  const phcstr = phc.serialize({
     id: 'scrypt',
     params: {ln: 10, r: 8, p: 16},
     salt: Buffer.from('NaCl'),
@@ -41,9 +41,10 @@ test('should pass the test vectors', async t => {
   });
   // $scrypt$ln=10,r=8,p=16$TmFDbA$/bq+HJ00cgB4VucZDQHp/nxq18vII3gw53N2Y0s3MWIurzDZLiKjiG/xCSedmDDaxyevuUqD7m2DYMvfoswGQA
   t.true(await m.verify(phcstr, 'password'));
+});
 
-  // Vextor 3
-  phcstr = phc.serialize({
+test('should pass the test vector 3', async t => {
+  const phcstr = phc.serialize({
     id: 'scrypt',
     params: {ln: 14, r: 8, p: 1},
     salt: Buffer.from('SodiumChloride'),
@@ -59,9 +60,10 @@ test('should pass the test vectors', async t => {
   });
   // $scrypt$ln=14,r=8,p=1$U29kaXVtQ2hsb3JpZGU$cCO9yzr9c0hGHAbNgf046/2o+7qQT44+qbVD9lRdofLVQylVYT8Pz2LUlwUkKpr55h6F3A1lHkDfzwF7RVdYhw
   t.true(await m.verify(phcstr, 'pleaseletmein'));
+});
 
-  // Vextor 4
-  phcstr = phc.serialize({
+test('should pass the test vector 4', async t => {
+  const phcstr = phc.serialize({
     id: 'scrypt',
     params: {ln: 20, r: 8, p: 1},
     salt: Buffer.from('SodiumChloride'),
@@ -76,5 +78,7 @@ test('should pass the test vectors', async t => {
     ),
   });
   // $scrypt$ln=20,r=8,p=1$U29kaXVtQ2hsb3JpZGU$IQHLm2pRGq6t274Jz3D4gexWjVdKL/1Nq+XumCCtqkeOVv2PS6XQn/ocbZJ8QPTDNzBASeipUvvL9Fxvp3pBpA
+  console.log(require('os').freemem());
   t.true(await m.verify(phcstr, 'pleaseletmein'));
+  console.log(require('os').freemem());
 });
