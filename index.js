@@ -98,7 +98,7 @@ function hash(password, options) {
       new TypeError("The 'parallelism' option must be an integer")
     );
   }
-  const maxpar = Math.floor((2 ** 32 - 1) * 32 / (128 * blocksize));
+  const maxpar = Math.floor((Math.pow(2, 32) - 1) * 32 / (128 * blocksize));
   if (parallelism < 1 || parallelism > maxpar) {
     return Promise.reject(
       new TypeError(
@@ -117,7 +117,7 @@ function hash(password, options) {
   }
 
   const params = {
-    N: 2 ** cost,
+    N: Math.pow(2, cost),
     r: blocksize,
     p: parallelism,
   };
@@ -200,7 +200,9 @@ function verify(phcstr, password) {
   ) {
     return Promise.reject(new TypeError("The 'p' param must be an integer"));
   }
-  const maxpar = Math.floor((2 ** 32 - 1) * 32 / (128 * phcobj.params.p));
+  const maxpar = Math.floor(
+    (Math.pow(2, 32) - 1) * 32 / (128 * phcobj.params.p)
+  );
   if (phcobj.params.p < 1 || phcobj.params.p > maxpar) {
     return Promise.reject(
       new TypeError(`The 'p' param must be in the range (1 <= p <= ${maxpar})`)
@@ -208,7 +210,7 @@ function verify(phcstr, password) {
   }
 
   const params = {
-    N: 2 ** phcobj.params.n,
+    N: Math.pow(2, phcobj.params.ln),
     r: phcobj.params.r,
     p: phcobj.params.p,
   };
