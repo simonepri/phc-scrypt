@@ -128,7 +128,7 @@ function hash(password, options) {
       const phcstr = phc.serialize({
         id: 'scrypt',
         params: {
-          n: cost,
+          ln: cost,
           r: blocksize,
           p: parallelism,
         },
@@ -181,15 +181,17 @@ function verify(phcstr, password) {
 
   // Cost Validation
   if (
-    typeof phcobj.params.n !== 'number' ||
-    !Number.isInteger(phcobj.params.n)
+    typeof phcobj.params.ln !== 'number' ||
+    !Number.isInteger(phcobj.params.ln)
   ) {
-    return Promise.reject(new TypeError("The 'n' param must be an integer"));
+    return Promise.reject(new TypeError("The 'ln' param must be an integer"));
   }
   const maxcost = 128 * phcobj.params.r / 8 - 1;
-  if (phcobj.params.n < 1 || phcobj.params.n > maxcost) {
+  if (phcobj.params.ln < 1 || phcobj.params.ln > maxcost) {
     return Promise.reject(
-      new TypeError(`The 'n' param must be in the range (1 <= n <= ${maxcost})`)
+      new TypeError(
+        `The 'ln' param must be in the range (1 <= ln <= ${maxcost})`
+      )
     );
   }
 

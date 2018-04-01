@@ -9,7 +9,7 @@ test('should pass the test vectors', async t => {
   // Vextor 1
   let phcstr = phc.serialize({
     id: 'scrypt',
-    params: {n: 4, r: 1, p: 1},
+    params: {ln: 4, r: 1, p: 1},
     salt: Buffer.from(''),
     hash: Buffer.from(
       (
@@ -21,13 +21,13 @@ test('should pass the test vectors', async t => {
       'hex'
     ),
   });
-  // $scrypt$n=4,r=1,p=1$$d9ZXYjhleyA7GcpCwYoEl/FrSETjB0ro39/6P+3iFEL80Aad7QlI+DJqdToPyB8X6NPg+y4NNijPNeIMONGJBg
+  // $scrypt$ln=4,r=1,p=1$$d9ZXYjhleyA7GcpCwYoEl/FrSETjB0ro39/6P+3iFEL80Aad7QlI+DJqdToPyB8X6NPg+y4NNijPNeIMONGJBg
   t.true(await m.verify(phcstr, ''));
 
   // Vextor 2
   phcstr = phc.serialize({
     id: 'scrypt',
-    params: {n: 10, r: 8, p: 16},
+    params: {ln: 10, r: 8, p: 16},
     salt: Buffer.from('NaCl'),
     hash: Buffer.from(
       (
@@ -39,13 +39,13 @@ test('should pass the test vectors', async t => {
       'hex'
     ),
   });
-  // $scrypt$n=10,r=8,p=16$TmFDbA$/bq+HJ00cgB4VucZDQHp/nxq18vII3gw53N2Y0s3MWIurzDZLiKjiG/xCSedmDDaxyevuUqD7m2DYMvfoswGQA
+  // $scrypt$ln=10,r=8,p=16$TmFDbA$/bq+HJ00cgB4VucZDQHp/nxq18vII3gw53N2Y0s3MWIurzDZLiKjiG/xCSedmDDaxyevuUqD7m2DYMvfoswGQA
   t.true(await m.verify(phcstr, 'password'));
 
   // Vextor 3
   phcstr = phc.serialize({
     id: 'scrypt',
-    params: {n: 14, r: 8, p: 1},
+    params: {ln: 14, r: 8, p: 1},
     salt: Buffer.from('SodiumChloride'),
     hash: Buffer.from(
       (
@@ -57,13 +57,13 @@ test('should pass the test vectors', async t => {
       'hex'
     ),
   });
-  // $scrypt$n=14,r=8,p=1$U29kaXVtQ2hsb3JpZGU$cCO9yzr9c0hGHAbNgf046/2o+7qQT44+qbVD9lRdofLVQylVYT8Pz2LUlwUkKpr55h6F3A1lHkDfzwF7RVdYhw
+  // $scrypt$ln=14,r=8,p=1$U29kaXVtQ2hsb3JpZGU$cCO9yzr9c0hGHAbNgf046/2o+7qQT44+qbVD9lRdofLVQylVYT8Pz2LUlwUkKpr55h6F3A1lHkDfzwF7RVdYhw
   t.true(await m.verify(phcstr, 'pleaseletmein'));
 
   // Vextor 4
   phcstr = phc.serialize({
     id: 'scrypt',
-    params: {n: 20, r: 8, p: 1},
+    params: {ln: 20, r: 8, p: 1},
     salt: Buffer.from('SodiumChloride'),
     hash: Buffer.from(
       (
@@ -75,6 +75,6 @@ test('should pass the test vectors', async t => {
       'hex'
     ),
   });
-  // $scrypt$n=20,r=8,p=1$U29kaXVtQ2hsb3JpZGU$IQHLm2pRGq6t274Jz3D4gexWjVdKL/1Nq+XumCCtqkeOVv2PS6XQn/ocbZJ8QPTDNzBASeipUvvL9Fxvp3pBpA
+  // $scrypt$ln=20,r=8,p=1$U29kaXVtQ2hsb3JpZGU$IQHLm2pRGq6t274Jz3D4gexWjVdKL/1Nq+XumCCtqkeOVv2PS6XQn/ocbZJ8QPTDNzBASeipUvvL9Fxvp3pBpA
   t.true(await m.verify(phcstr, 'pleaseletmein'));
 });
