@@ -246,7 +246,6 @@ function verify(phcstr, password) {
   if (typeof phcobj.hash === 'undefined') {
     return Promise.reject(new TypeError('No hash found in the given string'));
   }
-
   const hash = phcobj.hash;
   const keylen = phcobj.hash.byteLength;
 
