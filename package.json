@@ -61,7 +61,6 @@
   },
   "dependencies": {
     "@phc/format": "^0.3.5",
-    "pify": "^3.0.0",
     "scrypt": "^6.0.3",
     "tsse": "^1.1.4"
   },
