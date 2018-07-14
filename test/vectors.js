@@ -18,7 +18,7 @@ test('should pass the test vector 1', async t => {
         'e8 d3 e0 fb 2e 0d 36 28 cf 35 e2 0c 38 d1 89 06'
       ).replace(/ /g, ''),
       'hex'
-    ),
+    )
   });
   // $scrypt$ln=4,r=1,p=1$$d9ZXYjhleyA7GcpCwYoEl/FrSETjB0ro39/6P+3iFEL80Aad7QlI+DJqdToPyB8X6NPg+y4NNijPNeIMONGJBg
   t.true(await m.verify(phcstr, ''));
@@ -37,7 +37,7 @@ test('should pass the test vector 2', async t => {
         'c7 27 af b9 4a 83 ee 6d 83 60 cb df a2 cc 06 40'
       ).replace(/ /g, ''),
       'hex'
-    ),
+    )
   });
   // $scrypt$ln=10,r=8,p=16$TmFDbA$/bq+HJ00cgB4VucZDQHp/nxq18vII3gw53N2Y0s3MWIurzDZLiKjiG/xCSedmDDaxyevuUqD7m2DYMvfoswGQA
   t.true(await m.verify(phcstr, 'password'));
@@ -56,7 +56,7 @@ test('should pass the test vector 3', async t => {
         'e6 1e 85 dc 0d 65 1e 40 df cf 01 7b 45 57 58 87'
       ).replace(/ /g, ''),
       'hex'
-    ),
+    )
   });
   // $scrypt$ln=14,r=8,p=1$U29kaXVtQ2hsb3JpZGU$cCO9yzr9c0hGHAbNgf046/2o+7qQT44+qbVD9lRdofLVQylVYT8Pz2LUlwUkKpr55h6F3A1lHkDfzwF7RVdYhw
   t.true(await m.verify(phcstr, 'pleaseletmein'));
@@ -80,7 +80,7 @@ test('should pass the test vector 4', async t => {
         '37 30 40 49 e8 a9 52 fb cb f4 5c 6f a7 7a 41 a4'
       ).replace(/ /g, ''),
       'hex'
-    ),
+    )
   });
   // $scrypt$ln=20,r=8,p=1$U29kaXVtQ2hsb3JpZGU$IQHLm2pRGq6t274Jz3D4gexWjVdKL/1Nq+XumCCtqkeOVv2PS6XQn/ocbZJ8QPTDNzBASeipUvvL9Fxvp3pBpA
   t.true(await m.verify(phcstr, 'pleaseletmein'));

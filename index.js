@@ -1,4 +1,4 @@
-/* eslint-disable max-params,capitalized-comments,complexity */
+/* eslint-disable capitalized-comments,complexity,prefer-destructuring */
 'use strict';
 
 const crypto = require('crypto');
@@ -21,7 +21,7 @@ const defaults = Object.freeze({
   // parallelism (p), in number of instances of the mixing function run independently.
   parallelism: 1,
   // The minimum recommended size for the salt is 128 bits.
-  saltSize: 16,
+  saltSize: 16
 });
 
 /**
@@ -102,7 +102,7 @@ function hash(password, options) {
       new TypeError("The 'cost' option must be an integer")
     );
   }
-  const maxcost = 128 * blocksize / 8 - 1;
+  const maxcost = (128 * blocksize) / 8 - 1;
   if (cost < 2 || cost > maxcost) {
     return Promise.reject(
       new TypeError(
@@ -117,7 +117,7 @@ function hash(password, options) {
       new TypeError("The 'parallelism' option must be an integer")
     );
   }
-  const maxpar = Math.floor((Math.pow(2, 32) - 1) * 32 / (128 * blocksize));
+  const maxpar = Math.floor(((Math.pow(2, 32) - 1) * 32) / (128 * blocksize));
   if (parallelism < 1 || parallelism > maxpar) {
     return Promise.reject(
       new TypeError(
@@ -138,7 +138,7 @@ function hash(password, options) {
   const params = {
     N: Math.pow(2, cost),
     r: blocksize,
-    p: parallelism,
+    p: parallelism
   };
   const keylen = 32;
 
@@ -149,10 +149,10 @@ function hash(password, options) {
         params: {
           ln: cost,
           r: blocksize,
-          p: parallelism,
+          p: parallelism
         },
         salt,
-        hash,
+        hash
       });
       return phcstr;
     });
@@ -163,8 +163,8 @@ function hash(password, options) {
  * Determines whether or not the hash stored inside the PHC formatted string
  * matches the hash generated for the password provided.
  * @public
- * @param  {string} password User's password input.
  * @param  {string} phcstr Secure hash string generated from this package.
+ * @param  {string} password User's password input.
  * @returns {Promise.<boolean>} A boolean that is true if the hash computed
  * for the password matches.
  */
@@ -205,7 +205,7 @@ function verify(phcstr, password) {
   ) {
     return Promise.reject(new TypeError("The 'ln' param must be an integer"));
   }
-  const maxcost = 128 * phcobj.params.r / 8 - 1;
+  const maxcost = (128 * phcobj.params.r) / 8 - 1;
   if (phcobj.params.ln < 1 || phcobj.params.ln > maxcost) {
     return Promise.reject(
       new TypeError(
@@ -222,7 +222,7 @@ function verify(phcstr, password) {
     return Promise.reject(new TypeError("The 'p' param must be an integer"));
   }
   const maxpar = Math.floor(
-    (Math.pow(2, 32) - 1) * 32 / (128 * phcobj.params.p)
+    ((Math.pow(2, 32) - 1) * 32) / (128 * phcobj.params.p)
   );
   if (phcobj.params.p < 1 || phcobj.params.p > maxpar) {
     return Promise.reject(
@@ -233,7 +233,7 @@ function verify(phcstr, password) {
   const params = {
     N: Math.pow(2, phcobj.params.ln),
     r: phcobj.params.r,
-    p: phcobj.params.p,
+    p: phcobj.params.p
   };
 
   // Salt Validation
@@ -267,5 +267,5 @@ function identifiers() {
 module.exports = {
   hash,
   verify,
-  identifiers,
+  identifiers
 };
