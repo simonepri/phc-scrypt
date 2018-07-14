@@ -60,7 +60,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@phc/format": "^0.3.5",
+    "@phc/format": "^0.4.2",
     "scrypt": "^6.0.3",
     "tsse": "^1.1.4"
   },
