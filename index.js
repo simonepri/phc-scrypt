@@ -1,10 +1,10 @@
 /* eslint-disable capitalized-comments,complexity,prefer-destructuring */
 'use strict';
 
-const crypto = require('crypto');
 const scrypt = require('scrypt');
 const tsse = require('tsse');
 const phc = require('@phc/format');
+const gensalt = require('@kdf/salt');
 
 const MAX_UINT32 = 4294967295; // 2**32 - 1
 
@@ -23,37 +23,6 @@ const defaults = Object.freeze({
   // The minimum recommended size for the salt is 128 bits.
   saltSize: 16
 });
-
-/**
- * Promisify a function.
- * @private
- * @param  {Function} fn The function to promisify.
- * @return {Function} The promisified function.
- */
-function pify(fn) {
-  return function() {
-    return new Promise((resolve, reject) => {
-      // eslint-disable-next-line prefer-rest-params
-      const args = Array.prototype.slice.call(arguments);
-      args.push((err, result) => {
-        if (err) reject(err);
-        else resolve(result);
-      });
-      fn.apply(this, args);
-    });
-  };
-}
-
-/**
- * Generates a cryptographically secure random string for use as a password salt
- * using Node's built-in crypto.randomBytes().
- * @private
- * @param  {number} length The length of the salt to be generated.
- * @return {Promise.<string>} The salt string.
- */
-function genSalt(length) {
-  return pify(crypto.randomBytes)(length);
-}
 
 /**
  * Computes the hash string of the given password in the PHC format using scrypt
@@ -142,7 +111,7 @@ function hash(password, options) {
   };
   const keylen = 32;
 
-  return genSalt(saltSize).then(salt => {
+  return gensalt(saltSize).then(salt => {
     return scrypt.hash(password, params, keylen, salt).then(hash => {
       const phcstr = phc.serialize({
         id: 'scrypt',
