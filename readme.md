@@ -621,7 +621,7 @@ format.
 
 <a name="verify"></a>
 
-## verify(password, phcstr) ⇒ <code>Promise.&lt;boolean&gt;</code>
+## verify(phcstr, password) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Determines whether or not the hash stored inside the PHC formatted string
 matches the hash generated for the password provided.
 
@@ -632,8 +632,8 @@ for the password matches.
 
 | Param | Type | Description |
 | --- | --- | --- |
-| password | <code>string</code> | User's password input. |
 | phcstr | <code>string</code> | Secure hash string generated from this package. |
+| password | <code>string</code> | User's password input. |
 
 <a name="identifiers"></a>
 
@@ -655,7 +655,6 @@ Gets the list of all identifiers supported by this hashing function.
 ## Contributing
 
 Contributions are REALLY welcome and if you find a security flaw in this code, PLEASE [report it][new issue].  
-Please check the [contributing guidelines][contributing] for more details. Thanks!
 
 ## Authors
 
@@ -673,7 +672,6 @@ This project is licensed under the MIT License - see the [license][license] file
 [contributors]: https://github.com/simonepri/phc-scrypt/contributors
 
 [license]: https://github.com/simonepri/phc-scrypt/tree/master/license
-[contributing]: https://github.com/simonepri/phc-scrypt/tree/master/.github/contributing.md
 
 [tvec]: https://github.com/simonepri/phc-scrypt/tree/master/test/vectors.js
 
