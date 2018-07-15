@@ -99,7 +99,7 @@ function hash(password, options) {
   if (saltSize < 8 || saltSize > 1024) {
     return Promise.reject(
       new TypeError(
-        "The 'saltSize' option must be in the range (8 <= parallelism <= 1023)"
+        "The 'saltSize' option must be in the range (8 <= saltSize <= 1023)"
       )
     );
   }
