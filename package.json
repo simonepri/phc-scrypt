@@ -1,5 +1,5 @@
 {
-  "version": "1.0.2",
+  "version": "1.0.3",
   "name": "@phc/scrypt",
   "description": "Node.JS scrypt password hashing algorithm following the PHC string format",
   "license": "MIT",
