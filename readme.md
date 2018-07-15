@@ -591,7 +591,7 @@ This package implements them [here][tvec].
 <dd><p>Computes the hash string of the given password in the PHC format using scrypt
 package.</p>
 </dd>
-<dt><a href="#verify">verify(password, phcstr)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
+<dt><a href="#verify">verify(phcstr, password)</a> ⇒ <code>Promise.&lt;boolean&gt;</code></dt>
 <dd><p>Determines whether or not the hash stored inside the PHC formatted string
 matches the hash generated for the password provided.</p>
 </dd>
@@ -602,7 +602,7 @@ matches the hash generated for the password provided.</p>
 
 <a name="hash"></a>
 
-## hash(password, [options]) ⇒ <code>Promise.&lt;string&gt;</code>
+### hash(password, [options]) ⇒ <code>Promise.&lt;string&gt;</code>
 Computes the hash string of the given password in the PHC format using scrypt
 package.
 
@@ -621,7 +621,7 @@ format.
 
 <a name="verify"></a>
 
-## verify(phcstr, password) ⇒ <code>Promise.&lt;boolean&gt;</code>
+### verify(phcstr, password) ⇒ <code>Promise.&lt;boolean&gt;</code>
 Determines whether or not the hash stored inside the PHC formatted string
 matches the hash generated for the password provided.
 
@@ -637,7 +637,7 @@ for the password matches.
 
 <a name="identifiers"></a>
 
-## identifiers() ⇒ <code>Array.&lt;string&gt;</code>
+### identifiers() ⇒ <code>Array.&lt;string&gt;</code>
 Gets the list of all identifiers supported by this hashing function.
 
 **Kind**: global function  
