@@ -152,6 +152,11 @@ function verify(phcstr, password) {
     );
   }
 
+  // Parameters Existence Validation
+  if (typeof phcobj.params !== 'object') {
+    return Promise.reject(new TypeError('The param section cannot be empty'));
+  }
+
   // Blocksize Validation
   if (
     typeof phcobj.params.r !== 'number' ||
@@ -219,7 +224,7 @@ function verify(phcstr, password) {
   const keylen = phcobj.hash.byteLength;
 
   return scrypt.hash(password, params, keylen, salt).then(newhash => {
-    const match = tsse(hash.toString('base64'), newhash.toString('base64'));
+    const match = tsse(hash, newhash);
     return match;
   });
 }
