@@ -1,12 +1,18 @@
 /* eslint-disable capitalized-comments,complexity,prefer-destructuring */
 'use strict';
 
-const scrypt = require('scrypt');
+const crypto = require('crypto');
+const util = require('util');
 const tsse = require('tsse');
 const phc = require('@phc/format');
 const gensalt = require('@kdf/salt');
 
+const scryptPromisify = util.promisify(crypto.scrypt);
+
 const MAX_UINT32 = 4294967295; // 2**32 - 1
+
+// Max memory Node can use. Being generous to allow most usages, without abuse.
+const MAX_MEM = 128 * 1024 * 1024;
 
 /**
  * Default configurations used to generate a new hash.
@@ -107,12 +113,13 @@ function hash(password, options) {
   const params = {
     N: Math.pow(2, cost),
     r: blocksize,
-    p: parallelism
+    p: parallelism,
+    maxmem: MAX_MEM
   };
   const keylen = 32;
 
   return gensalt(saltSize).then(salt => {
-    return scrypt.hash(password, params, keylen, salt).then(hash => {
+    return scryptPromisify(password, salt, keylen, params).then(hash => {
       const phcstr = phc.serialize({
         id: 'scrypt',
         params: {
@@ -207,7 +214,8 @@ function verify(phcstr, password) {
   const params = {
     N: Math.pow(2, phcobj.params.ln),
     r: phcobj.params.r,
-    p: phcobj.params.p
+    p: phcobj.params.p,
+    maxmem: MAX_MEM
   };
 
   // Salt Validation
@@ -223,7 +231,7 @@ function verify(phcstr, password) {
   const hash = phcobj.hash;
   const keylen = phcobj.hash.byteLength;
 
-  return scrypt.hash(password, params, keylen, salt).then(newhash => {
+  return scryptPromisify(password, salt, keylen, params).then(newhash => {
     const match = tsse(hash, newhash);
     return match;
   });

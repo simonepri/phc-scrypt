@@ -1,5 +1,5 @@
 {
-  "version": "1.0.4",
+  "version": "2.0.0",
   "name": "@phc/scrypt",
   "description": "Node.JS scrypt password hashing algorithm following the PHC string format",
   "license": "MIT",
@@ -48,7 +48,7 @@
     "index.js"
   ],
   "engines": {
-    "node": ">=4"
+    "node": ">=10.5"
   },
   "scripts": {
     "bench": "node bench.js",
@@ -62,7 +62,6 @@
   "dependencies": {
     "@kdf/salt": "^1.0.1",
     "@phc/format": "^0.5.0",
-    "scrypt": "^6.0.3",
     "tsse": "^1.1.4"
   },
   "devDependencies": {
