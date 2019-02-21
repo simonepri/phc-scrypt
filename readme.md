@@ -94,6 +94,8 @@ For more details consult the scrypt paper [here][paper].
 npm install --save @phc/scrypt
 ```
 
+> Version 2 and higher requires Node v10.5.
+
 ## Usage
 
 ```js
